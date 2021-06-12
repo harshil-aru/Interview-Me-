@@ -8,8 +8,7 @@ const routes = require('express').Router();
 
 routes.post('/cancelInterview', function(req,res){
     let interviewInfo = req.body.id;
-   //  console.log(req.body.id);
-   //  console.log(interviewInfo);
+   
    interviewInfo.forEach(function (i) {
        Interviews.destroy({
            where: {
