@@ -19,7 +19,7 @@ routes.get('/distinctschedules', function (req, res) {
         group: ['date', 'startTime', 'endTime']
     })
     .then((records) => {
-            console.log("records : ", records);
+            
             let distinctSchedules = records.map((rec) => ({
                 date: rec.date,
                 startTime: rec.startTime,
