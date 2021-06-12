@@ -11,16 +11,16 @@ var smtpTransport = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
     auth: {
-        user: "iamharshilsagar@gmail.com",
-        pass: "Harshil@1999"
+        user: "SENDER@EMAIL.COM",//Add your email
+        pass: "PASSWORDOFSENDER"//Add your password
     }
 });
 
 const routes = require('express').Router();
 
 routes.post('/interviews', function (req, res) {
-    // console.log("Request : ", req);
-    console.log("req.body => ", req.body);
+    
+    
 
 
     let date_INC = req.body.date;
@@ -29,15 +29,14 @@ routes.post('/interviews', function (req, res) {
     let lisOfparticipants = req.body.participants;
     let duration_INC = req.body.duration;
     let description_INC = req.body.description;
-    // console.log("lisOfparticipants :", lisOfparticipants);
+    
 
     if (lisOfparticipants.length < 2) {
-        console.error("gen error");
+        
         res.status(401).send({ message: 'Add atleast 2 particpants please!' });
     } else {
-        console.log("Find Clashes -----------------------__>");
         let participantIdArray = lisOfparticipants.map((p) => p.id);
-        // console.log("participantIdArray : ", participantIdArray);
+        
 
         Interviews.findOne({
             where: {
@@ -61,26 +60,24 @@ routes.post('/interviews', function (req, res) {
         })
             .then(function (record) {
                 if (record) {
-                    // console.log("record : ", record);
+                    
                     // There is a CLASH
                     let clashingParticipantId = record.dataValues.participantId;
-                    // console.log("clashingParticipantId : ", clashingParticipantId)
+                    
 
-                    let msg = "Following Partipant have Clashing Interviews : ";
+                    let msg = "These Partipants won't be able to make there : ";
                     Participants.findByPk(clashingParticipantId)
                         .then((record) => {
-                            console.log("Clashing Record : ", record);
-                            msg = msg + record.dataValues.name + "(" + record.dataValues.email + ")";
-                            console.error("gen error");
+                            
                             res.status(401).send({ message: msg });
                         })
 
                 }
                 else {
-                    // record -> null
-                    console.log("NO CLASH");
+                    
+                    
                     lisOfparticipants.forEach(function (oneParticipant) {
-                        // console.log("oneParticipant : ", oneParticipant);
+                        
                         let newInterview = {
                             participantId: oneParticipant.id,
                             date: date_INC,
@@ -90,9 +87,7 @@ routes.post('/interviews', function (req, res) {
                             description: description_INC 
                         }
                         Interviews.create(newInterview).then(intrvw => {
-                            console.log("intrvw added ---->>>> ", intrvw);
-
-                            console.log("RUN XXXXXXXXXXXXXX");
+                            
                             let participantEmail = oneParticipant.email;
                             // Sending a MAIL
 
