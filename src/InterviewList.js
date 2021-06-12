@@ -116,30 +116,40 @@ class InterviewList extends Component {
 
     console.log("finalScehule : ", finalScehule);
 
-
+    let count=0;
     return (
       <div className="bg-light" style={{
         minHeight: "100vh"
       }}>
-        <h1 style={{ textAlign: "center", padding: '20px' }} >Upcoming Interviews</h1>
+        <h4 className="my-2" style={{ textAlign: "center" }}>Upcoming Interviews</h4>
         <div className="container">
+        <div class="accordion" id="accordionExample">
+          
           {finalScehule.map((itr) => {
-
+            count++;
             return (
-              <div className="card " style={{ marginBottom: 4, marginTop: 4, padding: 20, backgroundColor:"#bddba8"}}>
-                <h1 style={{textAlign: 'center', padding: '10px'}}>{itr.description}</h1>
-                <h4 style={{padding:'5px'}}>Date: {itr.date} </h4>
-                <h4 style={{padding:'5px'}}>From: {itr.startTime} to {itr.endTime}</h4>
-                <h4 style={{padding:'5px'}}> Duration: {itr.duration}</h4>
-                <h4 style={{padding:'5px'}}>Participants: </h4>
-                <ul className="list-group" style={{padding: "10px"}}>
+          
+  <div class="accordion-item">
+    <h2 class="accordion-header" id={"heading"+count}>
+      <button class={count==1?"accordion-button":"accordion-button collapsed"} type="button" data-bs-toggle="collapse" data-bs-target={"#collapse"+count} aria-expanded={count==1?"true":"false"} aria-controls={"collapse"+count}>
+        <h2>{itr.description}</h2>
+      </button>
+    </h2>
+    <div id={"collapse"+count} class={count==1?"accordion-collapse collapse show":"accordion-collapse collapse"} aria-labelledby={"heading"+count} data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+         <div className="card" style={{ marginBottom: 10, marginTop: 10, padding: 10 }}>
+                <h1>{itr.description}</h1>
+                <h4>{itr.date} </h4>
+                <p><b>From</b> {itr.startTime} <b>to</b> {itr.endTime}</p>
+                <p> <b>Duration:</b> {itr.duration}</p>
+                <h3>Participants:</h3>
+                <ul className="list-group">
                   {itr.participants.map((oneP) => (
                     <li className="list-group-item">{participantMap.get(oneP)}</li>
                   ))}
                 </ul>
-                <div className="row">
-                  <div className="col-2"></div>
-                  <div className="col-2">
+                <div className="row mt-4">
+                  <div className="col-6">
                 <Link 
                   to={{
                     pathname: '/edit',
@@ -157,19 +167,21 @@ class InterviewList extends Component {
                    Edit Interview
                    </button></Link>
                    </div>
-                   <div className="col-2"></div>
-                   <div className="col-2"></div>
-                   <div className="col-2">
-                   <button className="btn btn-danger"
+                   <div className="col-6 d-flex flex-row-reverse">
+                   <button className="btn btn-danger" 
                    onClick={() => {this.cancelInterview(itr.id)}}>
                    Cancel Interview</button>
                    </div>
                    </div>
-                   <div className="col-2"></div>
               </div>
+      </div>
+    </div>
+  </div>
+             
             )
 
           })}
+          </div>
         </div>
       </div >
     )
