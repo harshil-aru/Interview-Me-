@@ -217,20 +217,20 @@ class EditInterview extends Component {
 
     return (
       <div className="bg-light">
-        <h1 style={{ textAlign: "center", padding :'20px' }}> Edit Interview</h1>
+        <h3 style={{ textAlign: "center" }}> Edit Interview</h3>
 
         {this.state.error ?
           (<Error message={this.state.errorMsg} />) : (<></>)
         }
 
         <form onSubmit={this.handleFormSubmit}>
-
+        <div className="row" style={{marginLeft:12}}>
           <div className="form-group">
-            <label style={{ marginLeft :'20px' ,fontWeight:"bold"}}>Select Participants : </label>
+            <label>Select Participants : </label>
 
             {
               this.state.participants.map(user => (
-                <div style={{ padding:"10px" }}>
+                <div>
                   <label key={user.id}>
                     {user.name + "(" + user.email + ")"}
                     <Checkbox name={user.email} checked={this.state.checkedItems.get(user.email)} onChange={this.handleCheckBoxChange} />
@@ -240,48 +240,48 @@ class EditInterview extends Component {
               ))
             }
           </div>
+          </div>
 
-          <div className="form-row">
-              <div className="form-group col-md-6">
-            <label style={{ marginLeft :'20px' ,fontWeight:"bold"}}>Date: </label>
-            <div style={{ marginLeft :'20px' ,fontWeight:"bold"}}>
+          <div className="row" style={{marginLeft:12, marginTop:20}}>
+          <div className="form-group col-3">
+            <label>Date: </label>
+            <div>
               <DatePicker
                 selected={this.state.date}
                 onChange={this.handleDateChange}
               />
             </div>
             </div>
-            <div className="form-group col-md-6">
-              <label style={{ marginLeft :'20px' ,fontWeight:"bold"}}>Duration: </label>
-              <div style={{ marginLeft :'20px' ,fontWeight:"bold"}}>
+            <div className="form-group col-3 ">
+              <label>Duration: </label>
+              <div>
                 <input className="duration" type="text" disabled value={this.state.duration} ></input>
               </div>
             </div>
             </div>
-            <div className ="form-row">
-            <div className="form-group col-12">
-              <label style={{ marginLeft :'20px' ,fontWeight:"bold"}}>Description</label>
-              <div style={{ padding :'20px' ,fontWeight:"bold"}}>
+            <div className ="row" style={{marginLeft:12, marginTop:20}}>
+            <div className="form-group col-4 ">
+              <label>Description</label>
               <textarea className="form-control" id="description" value={this.state.description} onChange={this.handleDescriptionChange}/>
             </div>
-            </div>
           </div>
-          <div className="form-row">
-            <div className="form-group col-md-6" style={{ padding:'20px' }}>
-              <label style={{ marginLeft :'20px' ,fontWeight:"bold"}}>Start Time</label>
-              <input type="time" className="form-control" id="start_time" value={this.state.startTime}
-                onChange={this.handleStartTimeChange} style={{ padding:'20px' }}/>
+          <div className="row " style={{marginLeft:12, marginTop:20}}>
+          <div className="form-group col-3 ">
+              <label>Start Time</label>
+              <input type="time"  id="start_time" value={this.state.startTime}
+                onChange={this.handleStartTimeChange} />
 
             </div>
-            <div className="form-group col-md-6" style={{ padding:'20px' }}>
-              <label style={{ marginLeft :'20px' ,fontWeight:"bold"}}>End Time</label>
-              <input type="time" className="form-control" id="end_time" value={this.state.endTime}
-                onChange={this.handleEndTimeChange} style={{ padding :'20px' }}/>
+            <div className="form-group col-3">
+              <label >End Time</label>
+              <input type="time"  id="end_time" value={this.state.endTime}
+                onChange={this.handleEndTimeChange} />
             </div>
           </div>
-
-          <div className="form-group" style={{ padding:'20px' }}>
+          <div className="row" style={{marginLeft:12, marginTop:20}}>
+          <div className="form-group">
             <input type="submit" value="Save Details" className="btn btn-primary" />
+          </div>
           </div>
         </form>
       </div>
