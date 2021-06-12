@@ -43,7 +43,7 @@ function addDumyData() {
    ]
    data.forEach((user) => {
        Participants.create(user).then(user => {
-           console.log("User added ---->>>> ", user);
+           console.log(user,"\n");
        })
    })
 }
