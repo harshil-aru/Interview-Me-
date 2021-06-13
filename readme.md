@@ -23,4 +23,4 @@ For the wesite the opening point is the root folder and
 npm start will easily start the react scripts
 
 to start the backend and check the the api endpoints go to backend folder and open terrminal write the command:
-node server will easily fire up the backend all the routes and functionalities can be easily found in routes folder and the Database Schema can be easily found the Models folder. i have used Postgresql as the backend along with Node.js for the server along with express server. For mailing service nodemailer is used.
+node server will easily fire up the backend all the routes and functionalities can be easily found in routes folder and the Database Schema can be easily found the Models folder. i have used Node.js for the server along with express server. For mailing service nodemailer is used.
